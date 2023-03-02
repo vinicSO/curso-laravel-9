@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateCommentFormRequest;
+use App\Http\Requests\StoreUpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,7 +50,7 @@ class CommentController extends Controller
         return view('users.comments.create', compact('user'));
     }
 
-    public function store (Request $request) {
+    public function store (StoreUpdateCommentFormRequest $request) {
 
         $userId = $request->id;
 
@@ -86,7 +88,7 @@ class CommentController extends Controller
         return view('users.comments.edit', compact('user', 'comment'));
     }
 
-    public function update (Request $request) {
+    public function update (StoreUpdateCommentFormRequest $request) {
 
         $userId = $request->user_id;
         $commentId = $request->comment_id;
