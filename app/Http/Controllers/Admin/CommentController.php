@@ -20,6 +20,7 @@ class CommentController extends Controller
     public function index (Request $request) {
 
         $userId = $request->id;
+        $search = $request->search;
 
         $user = $this->user->find($userId);
 
@@ -27,7 +28,9 @@ class CommentController extends Controller
             return redirect()->back();
         }
         
-        $comments = $user->comments()->get();
+        $comments = $this->comment->getComments(
+            search: $search ?? ''
+        );
 
         return view('users.comments.index', compact('user', 'comments'));
     }

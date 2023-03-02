@@ -18,8 +18,10 @@ class UserController extends Controller
     
     public function index(Request $request) {
 
+        $search = $request->search;
+
         $users = $this->model->getUsers(
-            search: $request->search ?? ''
+            search: $search ?? ''
         );
 
         $data = [
