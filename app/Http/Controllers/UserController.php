@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUpdateUserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -58,6 +59,16 @@ class UserController extends Controller
             'password'
         ]);
 
+        if ($request->image) {
+            // Outra forma de armazenar imagem, com o nome do arquivo personalizado
+            // $extension = $request->image->getClientOriginalExtension();
+            // $path = $request->image->storeAs('users', now() . ".{$extension}");
+
+            $path = $request->image->store('users');
+
+            $data['image'] = $path;
+        }
+
         $data['password'] = bcrypt($data['password']);
 
         $this->model->create($data);
@@ -88,6 +99,21 @@ class UserController extends Controller
             'name',
             'email'
         ]);
+
+        if ($request->image) {
+
+            if ($user->image && Storage::exists($user->image) ) {
+                Storage::delete($user->image);
+            }
+
+            // Outra forma de armazenar imagem, com o nome do arquivo personalizado
+            // $extension = $request->image->getClientOriginalExtension();
+            // $path = $request->image->storeAs('users', now() . ".{$extension}");
+
+            $path = $request->image->store('users');
+
+            $data['image'] = $path;
+        }
 
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
