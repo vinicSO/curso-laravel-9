@@ -12,29 +12,28 @@
         <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Pesquisar</button>
     </form>
 
-    @foreach($comments as $comment) 
-
-        <table class="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
-            <thead>
-                <tr>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-                    >
-                        Conteúdo
-                    </th>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-                    >
-                        Visível
-                    </th>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-                    >
-                        Editar
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
+    <table class="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
+        <thead>
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                    Conteúdo
+                </th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                    Visível
+                </th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                    Editar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($comments as $comment) 
                 <tr>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $comment->body }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $comment->visible ? 'SIM' : 'NÃO'}}</td>
@@ -42,7 +41,8 @@
                         <a href="{{ route('comments.edit', ['user_id' => $user->id, 'comment_id' => $comment->id]) }}" class="bg-green-200 rounded-full py-2 px-6">Editar</a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-    @endforeach
+            @endforeach
+        </tbody>
+    </table>
+    
 @endsection
